@@ -37,6 +37,16 @@ neurological function in children aged 3 to 15 living near a lead-emitting smelt
     Placeholder for raw data (to be added).
 
 
+## Data Cleaning:
+------
+
+### Outlier Management
+During the data cleaning process, an individual was recorded with an IQ value of **"999"**, 
+which, after a discussion with the primary investigator, was corrected to **"99"**. 
+
+### Changes Made
+Updated the IQ value from **"999"** to **"99"** for the identified individual.
+
 
 ## Reference:
 ------

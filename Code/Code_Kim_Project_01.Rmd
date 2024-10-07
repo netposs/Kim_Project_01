@@ -23,6 +23,22 @@ head(df)
 ```
 
 
+## Data Cleaning (Outlier)
+
+```{r, echo=TRUE}
+# Display the row with the incorrect value (IQ == 999)
+df[df$IQ == 999, ]
+
+# Correct the outlier value from 999 to 99
+df$IQ[df$IQ == 999] <- 99
+
+# Verify the correction
+df[df$IQ == 99, ]
+
+```
+Upon reviewing the dataset with PI, an odd IQ value of 999 was noticed, which seems highly improbable. After a discussion with the primary investigator, it was confirmed that this value should actually be 99.
+
+
 ## Graph (Bar Chart and Box Plot)
 
 ```{r, echo=TRUE}
