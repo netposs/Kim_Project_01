@@ -1,0 +1,84 @@
+---
+title: "Kim_Project_01"
+author: "Joey"
+date: "2024-10-07"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+An analysis of IQ levels by location status. The graph below shows the distribution of IQ levels by different location statuses. A summary table provides the means for each location status, and calculations are presented inline within the text at the result.
+
+
+## Data
+
+```{r, echo=TRUE}
+# Load the dataset into a dataframe 'df' from the raw CSV file
+df <- read.csv("C:/Users/Joey/iCloudDrive/Colorado-Biostatistics/2024-Fall/BIOS_6621_statistical consulting/BIOS6621_Projects/Kim_Project_01/DataRaw/lead-iq-01.csv")
+head(df)
+```
+
+
+## Graph (Bar Chart and Box Plot)
+
+```{r, echo=TRUE}
+# Load library for graph.
+library(ggplot2)
+
+# Create a Bar plot showing IQ levels by Smelter
+ggplot(df, aes(x = Smelter, y = IQ)) +
+  geom_bar(stat="identity", fill="light blue") +
+  theme_minimal() +
+  labs(title = "IQ Levels by Location (Bar Plot)", x = "Location", y = "IQ")
+
+# Create a Box plot showing IQ levels by Smelter
+ggplot(df, aes(x = Smelter, y = IQ)) +
+  geom_boxplot() +
+  labs(title = "IQ Levels by Location (Box Plot)", x = "Location", y = "IQ")
+```
+
+The graph above presents the distribution of IQ levels across different location statuses: houses are located far or near from Smelter. The plot provides a visual summary of the spread of IQ scores within each location group. It allows for easy comparison of IQ distributions between different locations.
+
+
+## Table
+
+```{r, echo=TRUE}
+
+# Load libraries to group the data by location and calculate descriptive statistics
+library(dplyr)
+
+# Create a summary table of mean, sd, min, max IQ by location
+df_summary <- df %>%
+  group_by(Smelter) %>%
+  summarise(Mean_IQ = mean(IQ),
+          SD_IQ = round(sd(IQ), 2),
+          Min_IQ = min(IQ),
+          Max_IQ = max(IQ),
+          Count = n()
+  )
+
+# Load the knitr library to format the table
+library(knitr)
+
+# Display the summary table using kable from knitr, with a caption
+kable(df_summary, caption = "Descriptive Statistics IQ Summary by Location")
+
+```
+
+The table summarizes key descriptive statistics for IQ by location status. It shows the mean, standard deviation, minimum, and maximum IQ values for individuals located near and far from the smelter. Notably, the 'Far' group has a higher average IQ but also includes significant variability, as highlighted by a potential outliers.
+
+
+## Results
+<!-- Using in-line calculation method in the text string for displaying mean values -->
+
+Mean IQ by Smelter Group
+
+The mean IQ for individuals in the **Far** group is `r round(mean(df$IQ[df$Smelter == "Far"]), 2)`.
+
+The mean IQ for individuals in the **Near** group is `r round(mean(df$IQ[df$Smelter == "Near"]), 2)`.
+
+
